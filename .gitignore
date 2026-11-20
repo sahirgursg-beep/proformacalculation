@@ -1,0 +1,23 @@
+# Database credentials (copy config/db_config.example.php to config/db_config.php)
+config/db_config.php
+
+# Runtime data: backups, imports, login throttle
+storage/backups/*
+!storage/backups/.htaccess
+!storage/backups/index.html
+storage/imports/*
+!storage/imports/.gitkeep
+storage/throttle/*
+!storage/throttle/.gitkeep
+
+# Uploaded images
+uploads/products/*
+!uploads/products/.gitkeep
+uploads/wizards/*
+!uploads/wizards/.gitkeep
+
+# Database dumps and archives
+*.sql.gz
+*.sqlite
+*.zip
+database/

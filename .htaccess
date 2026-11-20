@@ -1,0 +1,28 @@
+# FRCALC — güvenlik ve hız ayarları (Apache / LiteSpeed)
+
+Options -Indexes
+DirectoryIndex index.php
+
+# Gizli/iç dosyalara dışarıdan erişimi kapat
+<FilesMatch "(^\.|\.(sql|md|log|bak|ini|zip)$|^(composer\.(json|lock)|SimpleXLSX(Ex)?\.php)$)">
+    Require all denied
+</FilesMatch>
+
+# Sıkıştırma
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml font/woff
+</IfModule>
+
+# Tarayıcı önbelleği (dosyalar ?v= ile sürümlendiği için uzun süre güvenli)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+</IfModule>
+AddType font/woff .woff
+AddType font/woff2 .woff2

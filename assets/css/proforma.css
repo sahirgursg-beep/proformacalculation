@@ -1,0 +1,81 @@
+/* Proforma çıktısı — A4, yazdırmaya hazır */
+@font-face { font-family: "Cardo"; src: url("../fonts/cardo-regular.woff") format("woff"); font-weight: 400; }
+@font-face { font-family: "Cardo"; src: url("../fonts/cardo-bold.woff") format("woff"); font-weight: 700; }
+@font-face { font-family: "DM Sans"; src: url("../fonts/dmsans-var.woff") format("woff"); font-weight: 300 800; }
+
+:root {
+    --walnut: #3A2A1F; --ink: #2A211B; --oak: #7D6B59; --line: #E2D8C9; --brass: #A6844A; --linen: #F2EDE4;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--linen); color: var(--ink); font: 400 10pt/1.5 "DM Sans", "Segoe UI", sans-serif; font-feature-settings: "tnum" 1, "lnum" 1; -webkit-font-smoothing: antialiased; }
+
+/* Araç çubuğu */
+.pf-toolbar { position: sticky; top: 0; z-index: 5; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 24px; background: rgba(242,237,228,.95); border-bottom: 1px solid var(--line); }
+.pf-toolbar-right { display: flex; align-items: center; gap: 8px; }
+.pf-btn { display: inline-flex; align-items: center; gap: 7px; padding: 7px 14px; border: 1px solid #D3C6B3; border-radius: 5px; background: #FBF8F2; color: var(--walnut); font: 600 13px "DM Sans", sans-serif; text-decoration: none; cursor: pointer; }
+.pf-btn:hover { background: #EFE7DA; }
+.pf-btn-dark { background: var(--walnut); border-color: var(--walnut); color: #F7EFE3; }
+.pf-btn-dark:hover { background: #4A372A; }
+.pf-btn:focus-visible { outline: 2px solid var(--brass); outline-offset: 2px; }
+.pf-state { font: 600 12px "DM Sans", sans-serif; color: var(--oak); margin-right: 8px; display: inline-flex; align-items: center; gap: 6px; }
+.pf-state::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pf-state-confirmed { color: #5D6A3A; } .pf-state-review { color: #B07A1E; } .pf-state-cancelled { color: #8B2F2B; }
+
+/* Sayfa */
+.pf-sheet { position: relative; width: 210mm; min-height: 297mm; margin: 28px auto 60px; padding: 20mm 18mm 18mm; background: #fff; box-shadow: 0 1px 0 var(--line), 0 18px 40px -24px rgba(58,42,31,.35); overflow: hidden; }
+.pf-watermark { position: absolute; top: 118mm; left: 0; right: 0; text-align: center; font: 400 92pt/1 "Cardo", serif; color: rgba(58,42,31,.05); transform: rotate(-18deg); pointer-events: none; }
+
+.pf-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 9mm; border-bottom: 1.5px solid var(--walnut); }
+.pf-brand { font: 400 25pt/1 "Cardo", serif; color: var(--walnut); letter-spacing: -.01em; }
+.pf-brand-sub { margin-top: 5px; color: var(--oak); font-size: 8.5pt; }
+.pf-title { text-align: right; }
+.pf-title h1 { margin: 0; font: 400 15pt/1.1 "Cardo", serif; color: var(--brass); }
+.pf-no { margin-top: 4px; font-weight: 650; font-size: 11pt; color: var(--walnut); }
+
+.pf-parties { display: grid; grid-template-columns: 1.15fr 1fr 1.05fr; gap: 8mm; padding: 8mm 0 9mm; font-size: 9pt; line-height: 1.55; }
+.pf-label { font-size: 7.5pt; color: var(--oak); margin-bottom: 4px; }
+.pf-party-name { font: 400 13pt/1.25 "Cardo", serif; color: var(--walnut); margin-bottom: 3px; }
+.pf-muted { color: var(--oak); }
+.pf-small { font-size: 8pt; }
+.pf-meta { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; align-content: start; }
+.pf-meta dt { color: var(--oak); font-size: 7.5pt; padding-top: 2px; }
+.pf-meta dd { margin: 0; text-align: right; font-weight: 600; }
+
+/* Kalemler */
+.pf-items { width: 100%; border-collapse: collapse; font-size: 9pt; position: relative; }
+.pf-items th { text-align: left; font-weight: 600; font-size: 7.5pt; color: var(--oak); padding: 0 6px 7px; border-bottom: 1px solid var(--walnut); }
+.pf-items td { padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.pf-items .pf-num { text-align: right; white-space: nowrap; }
+.pf-items .pf-strong { font-weight: 650; }
+.pf-col-img { width: 15mm; }
+.pf-col-img img, .pf-noimg { display: block; width: 12mm; height: 12mm; object-fit: cover; border-radius: 2px; }
+.pf-noimg { background: #F4EFE7; }
+.pf-item-name { font-weight: 600; color: var(--ink); }
+.pf-item-code { font-size: 7.5pt; color: var(--oak); }
+.pf-service td { background: #FBF8F2; }
+tr { break-inside: avoid; }
+
+/* Toplamlar */
+.pf-bottom { display: grid; grid-template-columns: 1fr 72mm; gap: 12mm; margin-top: 8mm; break-inside: avoid; }
+.pf-notes p { margin: 0 0 6px; font-size: 8.5pt; line-height: 1.55; }
+.pf-trow { display: flex; justify-content: space-between; padding: 3px 0; font-size: 9pt; }
+.pf-trow span:last-child { font-weight: 600; }
+.pf-trow.pf-muted span:last-child { font-weight: 400; }
+.pf-grand { display: flex; justify-content: space-between; align-items: baseline; margin-top: 8px; padding-top: 9px; border-top: 1.5px solid var(--walnut); color: var(--walnut); }
+.pf-grand span:first-child { font: 400 14pt "Cardo", serif; }
+.pf-grand span:last-child { font: 400 21pt/1 "Cardo", serif; }
+
+.pf-sign { display: grid; grid-template-columns: 1fr 1fr; gap: 24mm; margin-top: 22mm; font-size: 8pt; color: var(--oak); break-inside: avoid; }
+.pf-line { border-top: 1px solid #BCAE9A; margin-bottom: 5px; height: 0; }
+
+@page { size: A4; margin: 0; }
+@media print {
+    body { background: #fff; }
+    .no-print { display: none !important; }
+    .pf-sheet { margin: 0; box-shadow: none; width: auto; min-height: auto; padding: 16mm 16mm 14mm; }
+    .pf-service td { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media screen and (max-width: 860px) {
+    .pf-sheet { width: auto; min-height: 0; margin: 12px; padding: 22px; }
+    .pf-parties, .pf-bottom { grid-template-columns: 1fr; }
+}
